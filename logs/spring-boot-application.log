@@ -1,0 +1,46 @@
+2024-09-10 10:40:02 - Starting SwiggyCloneApplicationTests using Java 21.0.1 with PID 41536 (started by vgiri in C:\Users\vgiri\git\repository\newswiggy)
+2024-09-10 10:40:02 - The following 1 profile is active: "dev"
+2024-09-10 10:40:04 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-10 10:40:04 - Finished Spring Data repository scanning in 83 ms. Found 4 JPA repository interfaces.
+2024-09-10 10:40:05 - HikariPool-1 - Starting...
+2024-09-10 10:40:06 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6cc48a17
+2024-09-10 10:40:06 - HikariPool-1 - Start completed.
+2024-09-10 10:40:06 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-10 10:40:06 - HHH000412: Hibernate ORM core version 6.4.9.Final
+2024-09-10 10:40:06 - HHH000026: Second-level cache disabled
+2024-09-10 10:40:06 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-10 10:40:08 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-10 10:40:08 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-10 10:40:09 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-10 10:40:10 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-10 10:40:12 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1d280bab, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74a121fe, org.springframework.security.web.context.SecurityContextHolderFilter@2531049f, org.springframework.security.web.header.HeaderWriterFilter@2822ee4b, org.springframework.security.web.authentication.logout.LogoutFilter@4d87553b, com.swiggy.newswiggy.jwt.JwtAuthenticationFilter@7c5c53e5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6efa2e06, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1a02063a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@12639753, org.springframework.security.web.session.SessionManagementFilter@451e8bd0, org.springframework.security.web.access.ExceptionTranslationFilter@6e44825e, org.springframework.security.web.access.intercept.AuthorizationFilter@25699129]
+2024-09-10 10:40:13 - Started SwiggyCloneApplicationTests in 11.185 seconds (process running for 12.901)
+2024-09-10 10:40:14 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-10 10:40:14 - HikariPool-1 - Shutdown initiated...
+2024-09-10 10:40:14 - HikariPool-1 - Shutdown completed.
+2024-09-10 10:43:33 - Starting SwiggyCloneApplication using Java 21.0.1 with PID 46212 (C:\Users\vgiri\git\repository\newswiggy\target\classes started by vgiri in C:\Users\vgiri\git\repository\newswiggy)
+2024-09-10 10:43:33 - The following 1 profile is active: "uat"
+2024-09-10 10:43:33 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-10 10:43:33 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-10 10:43:35 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-10 10:43:35 - Finished Spring Data repository scanning in 126 ms. Found 4 JPA repository interfaces.
+2024-09-10 10:43:37 - Tomcat initialized with port 5555 (http)
+2024-09-10 10:43:37 - Starting service [Tomcat]
+2024-09-10 10:43:37 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-09-10 10:43:37 - Initializing Spring embedded WebApplicationContext
+2024-09-10 10:43:37 - Root WebApplicationContext: initialization completed in 3464 ms
+2024-09-10 10:43:37 - HikariPool-1 - Starting...
+2024-09-10 10:43:38 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f9cd139
+2024-09-10 10:43:38 - HikariPool-1 - Start completed.
+2024-09-10 10:43:38 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-10 10:43:38 - HHH000412: Hibernate ORM core version 6.4.9.Final
+2024-09-10 10:43:38 - HHH000026: Second-level cache disabled
+2024-09-10 10:43:38 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-10 10:43:40 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-10 10:43:40 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-10 10:43:41 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-10 10:43:42 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-10 10:43:44 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@12774a93, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6aa94299, org.springframework.security.web.context.SecurityContextHolderFilter@d336247, org.springframework.security.web.header.HeaderWriterFilter@77398ed3, org.springframework.security.web.authentication.logout.LogoutFilter@5dabb321, com.swiggy.newswiggy.jwt.JwtAuthenticationFilter@4ca7a40a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3ab6d3e2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@371dccfd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5d4900f7, org.springframework.security.web.session.SessionManagementFilter@63e9a8fb, org.springframework.security.web.access.ExceptionTranslationFilter@3d3e501f, org.springframework.security.web.access.intercept.AuthorizationFilter@53456c68]
+2024-09-10 10:43:44 - LiveReload server is running on port 35729
+2024-09-10 10:43:44 - Tomcat started on port 5555 (http) with context path ''
+2024-09-10 10:43:44 - Started SwiggyCloneApplication in 12.099 seconds (process running for 13.092)

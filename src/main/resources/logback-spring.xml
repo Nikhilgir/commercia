@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="default">
+        <!-- Console Appender -->
+        <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] [%logger{36}] - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <!-- File Appender -->
+        <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>C:\Users\vgiri\OneDrive\Desktop\resume/swiggy.txt</file>
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] [%logger{36}] - %msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- Rolling over every minute -->
+                <fileNamePattern>C:\Users\vgiri\OneDrive\Desktop\resume/swiggy.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <!-- Root Logger -->
+        <root level="info">
+            <appender-ref ref="console" />
+            <appender-ref ref="file" />
+        </root>
+    </springProfile>
+</configuration>
