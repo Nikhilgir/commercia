@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,7 +24,7 @@ public class Products {
 	private String name;
 
 	@Column(name = "price", nullable = false)
-	private float price;
+	private double price;
 
 	@Column(name = "isveg", nullable = false)
 	private boolean isVeg;
@@ -34,9 +36,14 @@ public class Products {
 	private String category;
 
 	@Column(name = "rating")
-	private float rating;
+	private double rating;
+
+	@ManyToOne
+	@JoinColumn(name = "restaurant_id", nullable = false)
+	private Restaurant restaurant;
 
 	@Lob
 	@Column(name = "image")
 	private byte[] image;
+
 }

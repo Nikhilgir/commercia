@@ -1,5 +1,6 @@
 package com.swiggy.newswiggy.controller;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ import com.swiggy.newswiggy.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/product")
-@Slf4j
 public class ProductController {
 
 	private ProductService productService;
@@ -36,25 +37,13 @@ public class ProductController {
 
 	@PostMapping(value = "/add-product")
 	public ResponseEntity<String> addProduct(@Valid @ModelAttribute ProductRequest product) {
-
-		System.out.println(product.isVeg());
-		System.out.println(product.getCategory());
-		productService.saveProduct(product);
-		System.out.println(product.getPrice());
-		return new ResponseEntity<String>("Success", HttpStatus.CREATED);
+		return new ResponseEntity<String>(productService.saveProduct(product), HttpStatus.CREATED);
 	}
 
 	@CrossOrigin(origins = "*")
 	@GetMapping(value = "/get-product/{id}")
 	public ResponseEntity<ProductResponse> getProduct(@PathVariable("id") int id) {
-		Products product = productService.findProductById(id);
-		ProductResponse productResponse = new ProductResponse();
-		productResponse.setName(product.getName());
-		productResponse.setPrice(product.getPrice());
-		productResponse.setVeg(product.isVeg());
-		productResponse.setDescription(product.getDescription());
-		productResponse.setImage(product.getImage());
-		return new ResponseEntity<ProductResponse>(productResponse, HttpStatus.OK);
+		return new ResponseEntity<ProductResponse>(productService.findProductById(id), HttpStatus.OK);
 	}
 
 	@GetMapping("/get-all-product/{page}/{size}")
@@ -64,6 +53,11 @@ public class ProductController {
 			Page<Products> products = productService.getProducts(page, size);
 			return new ResponseEntity<>(products, HttpStatus.OK);
 		});
+	}
+
+	@GetMapping(value = "/get-all-restaurant-product/{restaurantId}")
+	public List<Products> findProductsByRestaurantId(int restaurantId) {
+		return productService.findAllProductByRestaurantId(restaurantId);
 	}
 
 }

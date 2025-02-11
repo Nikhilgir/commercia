@@ -38,4 +38,6 @@ public class ProductRequest {
 	@NotNull(message = "Image must not be null")
 	private MultipartFile image;
 
+	private int restaurantId;
+
 }

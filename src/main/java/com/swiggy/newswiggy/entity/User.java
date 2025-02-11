@@ -7,10 +7,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.swiggy.newswiggy.utils.AddressConverter;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -55,10 +52,6 @@ public class User implements UserDetails {
 
 	@Column(name = "age")
 	private int age;
-
-	@Column(name = "address", columnDefinition = "json")
-	@Convert(converter = AddressConverter.class)
-	private List<Address> address;
 
 	@OneToMany(mappedBy = "user")
 	private List<Addresses> addresses;

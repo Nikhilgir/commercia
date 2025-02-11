@@ -22,10 +22,9 @@ import org.mockito.Mockito;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.swiggy.newswiggy.entity.Address;
 import com.swiggy.newswiggy.entity.User;
 import com.swiggy.newswiggy.entity.User.Gender;
-import com.swiggy.newswiggy.exception.InvalidAgeException;
+import com.swiggy.newswiggy.exception.SwiggyException;
 import com.swiggy.newswiggy.repository.AddressesRepository;
 import com.swiggy.newswiggy.repository.CountryRepository;
 import com.swiggy.newswiggy.repository.UserRepository;
@@ -84,17 +83,6 @@ public class AuthServiceTest {
 		expectedUser.setAge(Period.between(requestUser.getDateOfBirth(), LocalDate.now()).getYears());
 		expectedUser.setDateOfBirth(requestUser.getDateOfBirth());
 		expectedUser.setGender(Gender.valueOf(requestUser.getGender().toUpperCase()));
-		List<Address> add = new ArrayList<Address>();
-		for (AddressRequest addresses : requestUser.getAddress()) {
-			Address a = new Address();
-			a.setHouseNo(addresses.getHouseNo());
-			a.setLandMark(addresses.getLandMark());
-			a.setCity(addresses.getCity());
-			a.setState(addresses.getState());
-			a.setZipCode(addresses.getZipCode());
-			add.add(a);
-		}
-		expectedUser.setAddress(add);
 	}
 
 	@DisplayName("JUnit test for saveSignupDetails method")
@@ -129,7 +117,7 @@ public class AuthServiceTest {
 	@Test
 	void registerUser_ShouldHandleExceptionForAge() {
 		requestUser.setDateOfBirth(LocalDate.of(2012, 12, 10));
-		assertThrows(InvalidAgeException.class, () -> authService.saveSignupDetails(requestUser));
+		assertThrows(SwiggyException.class, () -> authService.saveSignupDetails(requestUser));
 	}
 
 	@AfterAll

@@ -12,13 +12,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.swiggy.newswiggy.entity.Address;
 import com.swiggy.newswiggy.entity.Addresses;
 import com.swiggy.newswiggy.entity.Country;
 import com.swiggy.newswiggy.entity.User;
 import com.swiggy.newswiggy.entity.User.Gender;
-import com.swiggy.newswiggy.exception.EmailNotFoundException;
-import com.swiggy.newswiggy.exception.InvalidAgeException;
+import com.swiggy.newswiggy.exception.SwiggyException;
+import com.swiggy.newswiggy.exception.UserNameNotFoundException;
 import com.swiggy.newswiggy.repository.AddressesRepository;
 import com.swiggy.newswiggy.repository.CountryRepository;
 import com.swiggy.newswiggy.repository.UserRepository;
@@ -64,25 +63,12 @@ public class AuthServiceImp implements AuthService {
 		user.setPhoneNumber(signupRequest.getPhoneNumber());
 
 		if (Period.between(signupRequest.getDateOfBirth(), LocalDate.now()).getYears() < 18) {
-			throw new InvalidAgeException(ExceptionMessages.INVALID_AGE_EXCEPTION);
+			throw new SwiggyException(ExceptionMessages.INVALID_AGE_EXCEPTION);
 		}
 		user.setAge(Period.between(signupRequest.getDateOfBirth(), LocalDate.now()).getYears());
 		user.setDateOfBirth(signupRequest.getDateOfBirth());
 		user.setGender(Gender.valueOf(signupRequest.getGender().toUpperCase()));
 
-		// JSON Address
-		List<Address> addressList = new ArrayList<Address>();
-		Address a;
-		for (AddressRequest addresses : signupRequest.getAddress()) {
-			a = new Address();
-			a.setHouseNo(addresses.getHouseNo());
-			a.setLandMark(addresses.getLandMark());
-			a.setCity(addresses.getCity());
-			a.setState(addresses.getState());
-			a.setZipCode(addresses.getZipCode());
-			addressList.add(a);
-		}
-		user.setAddress(addressList);
 		User u = userRepository.save(user);
 
 		// Table Addresses
@@ -122,25 +108,6 @@ public class AuthServiceImp implements AuthService {
 		log.info("Authentication status is :" + b);
 
 		return userRepository.findByEmail(input.getUserName())
-				.orElseThrow(() -> new EmailNotFoundException(ExceptionMessages.EMAIL_NOT_FOUND_EXCEPTION));
-	}
-
-	// Get Data by JOIN
-	public void getUserDetailsByJoin(String email) {
-		List<User> list = userRepository.getUserDetails(email);
-		for (User data : list) {
-//			System.out.print("Name: " + data.getFirstName() + ", Email: " + data.getEmail() + ", House No: "
-//					+ data.getHouseNo() + ", City: " + data.getCity() + ", State: " + data.getState() + "\n");
-		}
-	}
-
-	public void UpdatePhoneNumber(long phone, String email) {
-		userRepository.updatePhoneNumber(phone, email);
-	}
-
-	public void findNameAndPhone(String email) {
-		log.info("find Name and Phone :");
-		Optional<String> us = userRepository.findNameAndPhoneByEmail(email);
-		System.out.println(us.get());
+				.orElseThrow(() -> new UserNameNotFoundException(ExceptionMessages.EMAIL_NOT_FOUND_EXCEPTION));
 	}
 }

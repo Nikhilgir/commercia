@@ -1,6 +1,8 @@
 package com.swiggy.newswiggy.service.serviceImp;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,23 +11,28 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.swiggy.newswiggy.entity.Products;
-import com.swiggy.newswiggy.exception.ProductNotFoundException;
+import com.swiggy.newswiggy.entity.Restaurant;
+import com.swiggy.newswiggy.exception.ResourceNotFound;
 import com.swiggy.newswiggy.repository.ProductRepository;
+import com.swiggy.newswiggy.repository.RestaurantRepository;
 import com.swiggy.newswiggy.request.ProductRequest;
+import com.swiggy.newswiggy.response.ProductResponse;
 import com.swiggy.newswiggy.service.ProductService;
 
 @Service
 public class ProductServiceImp implements ProductService {
 
 	private ProductRepository productRepository;
+	private RestaurantRepository restaurantRepository;
 
 	@Autowired
-	public ProductServiceImp(ProductRepository productRepository) {
+	public ProductServiceImp(ProductRepository productRepository, RestaurantRepository restaurantRepository) {
 		this.productRepository = productRepository;
+		this.restaurantRepository = restaurantRepository;
 	}
 
 	@Override
-	public void saveProduct(ProductRequest productData) {
+	public String saveProduct(ProductRequest productData) {
 
 		Products product = new Products();
 		product.setName(productData.getName());
@@ -40,17 +47,39 @@ public class ProductServiceImp implements ProductService {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		productRepository.save(product);
+		Optional<Restaurant> restaurant = restaurantRepository.findById(productData.getRestaurantId());
+		if (restaurant.isPresent()) {
+			product.setRestaurant(restaurant.get());
+			productRepository.save(product);
+		} else {
+			throw new ResourceNotFound("Restaurant not found");
+		}
+		return "Product Successfully added";
 	}
 
 	@Override
-	public Products findProductById(int id) {
-		return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product Not Found"));
+	public ProductResponse findProductById(int id) {
+
+		Products product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Product Not Found"));
+		ProductResponse productResponse = new ProductResponse();
+		productResponse.setName(product.getName());
+		productResponse.setPrice(product.getPrice());
+		productResponse.setVeg(product.isVeg());
+		productResponse.setDescription(product.getDescription());
+		productResponse.setImage(product.getImage());
+		productResponse.setRestaurantId(product.getRestaurant().getRestaurantId());
+		productResponse.setRestaurantName(product.getRestaurant().getName());
+		return productResponse;
 	}
 
 	@Override
 	public Page<Products> getProducts(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		return productRepository.findAll(pageable);
+	}
+
+	@Override
+	public List<Products> findAllProductByRestaurantId(int restaurantId) {
+		return productRepository.findProductsByRestaurantId(restaurantId);
 	}
 }

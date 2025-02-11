@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swiggy.newswiggy.entity.User;
-import com.swiggy.newswiggy.jwt.JwtService;
 import com.swiggy.newswiggy.request.LoginRequest;
 import com.swiggy.newswiggy.request.SignupRequest;
 import com.swiggy.newswiggy.response.LoginResponse;
 import com.swiggy.newswiggy.response.SignupResponse;
+import com.swiggy.newswiggy.security.jwt.JwtService;
 import com.swiggy.newswiggy.service.AuthService;
 import com.swiggy.newswiggy.utils.Endpoints;
 
@@ -66,4 +66,9 @@ public class AuthController {
 		return ResponseEntity.ok(loginResponse);
 
 	}
+
+//	{
+//		  "userName": "nkgiri@gmail.com",
+//		  "password": "Nikhil@g@123"
+//		}
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -49,8 +48,8 @@ public class GlobalExceptionHandler {
 				HttpStatus.BAD_REQUEST);
 	}
 
-	@ExceptionHandler(InvalidAgeException.class)
-	public ResponseEntity<ExceptionResponse> handleInvalidAgeException(InvalidAgeException ex) {
+	@ExceptionHandler(SwiggyException.class)
+	public ResponseEntity<ExceptionResponse> handleInvalidAgeException(SwiggyException ex) {
 
 		log.error("InvalidAgeException: " + ex.getMessage());
 		return new ResponseEntity<ExceptionResponse>(
@@ -58,16 +57,8 @@ public class GlobalExceptionHandler {
 				HttpStatus.BAD_REQUEST);
 	}
 
-	@ExceptionHandler(WrongPasswordException.class)
-	public ResponseEntity<ExceptionResponse> handleWrongPasswordException(WrongPasswordException ex) {
-		log.error("WrongPasswordException: " + ex.getMessage());
-		return new ResponseEntity<ExceptionResponse>(
-				new ExceptionResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED.name(), HttpStatus.UNAUTHORIZED.value()),
-				HttpStatus.UNAUTHORIZED);
-	}
-
-	@ExceptionHandler(EmailNotFoundException.class)
-	public ResponseEntity<ExceptionResponse> handleWrongPasswordException(EmailNotFoundException ex) {
+	@ExceptionHandler(UserNameNotFoundException.class)
+	public ResponseEntity<ExceptionResponse> handleWrongPasswordException(UserNameNotFoundException ex) {
 		log.error("EmailNotFoundException: " + ex.getMessage());
 		return new ResponseEntity<ExceptionResponse>(
 				new ExceptionResponse(ex.getMessage(), HttpStatus.NOT_FOUND.name(), HttpStatus.NOT_FOUND.value()),
@@ -82,32 +73,8 @@ public class GlobalExceptionHandler {
 				HttpStatus.UNAUTHORIZED);
 	}
 
-	@ExceptionHandler(InvalidTokenException.class)
-	public ResponseEntity<ExceptionResponse> handleInvalidTokenException(InvalidTokenException ex) {
-		log.error("InvalidTokenException: " + ex.getMessage());
-		return new ResponseEntity<ExceptionResponse>(
-				new ExceptionResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED.name(), HttpStatus.UNAUTHORIZED.value()),
-				HttpStatus.UNAUTHORIZED);
-	}
-
-	@ExceptionHandler(BadCredentialsException.class)
-	public ResponseEntity<ExceptionResponse> handleBadCredentialsException(BadCredentialsException ex) {
-		log.error("Exception occured: " + ex.getMessage());
-		return new ResponseEntity<ExceptionResponse>(
-				new ExceptionResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED.name(), HttpStatus.UNAUTHORIZED.value()),
-				HttpStatus.UNAUTHORIZED);
-	}
-
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ExceptionResponse> handleException(Exception ex) {
-		log.error("Exception occured: " + ex.getMessage());
-		return new ResponseEntity<ExceptionResponse>(
-				new ExceptionResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED.name(), HttpStatus.UNAUTHORIZED.value()),
-				HttpStatus.UNAUTHORIZED);
-	}
-
-	@ExceptionHandler(ProductNotFoundException.class)
-	public ResponseEntity<ExceptionResponse> handleProductNotFoundException(ProductNotFoundException ex) {
+	@ExceptionHandler(ResourceNotFound.class)
+	public ResponseEntity<ExceptionResponse> handleProductNotFoundException(ResourceNotFound ex) {
 		log.error("Exception occured: " + ex.getMessage());
 		return new ResponseEntity<ExceptionResponse>(
 				new ExceptionResponse(ex.getMessage(), HttpStatus.NOT_FOUND.name(), HttpStatus.NOT_FOUND.value()),
