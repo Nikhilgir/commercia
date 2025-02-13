@@ -35,7 +35,7 @@ public class SecurityConfiguration {
 		http.csrf().disable().authorizeHttpRequests()
 				.requestMatchers("/api/v1/user/**", "/swagger-ui/**", "/v3/api-docs/**", "swagger-resources/**",
 						"/swagger-resources", "/swagger-ui.html", "/api/v1/product/**", "/api/v1/order/**",
-						"/api/v1/restaurant/**", "/api/v1/cart/**", "/swagger-ui")
+						"/api/v1/restaurant/**","/api/v1/address/**", "/api/v1/cart/**", "/swagger-ui")
 				.permitAll().anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authenticationProvider(authenticationProvider)

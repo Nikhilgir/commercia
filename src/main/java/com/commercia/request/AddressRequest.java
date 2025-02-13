@@ -14,6 +14,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class AddressRequest {
+	
+	@NotNull(message = "userId can't be null")
+	private int userId;
 
 	@NotBlank(message = "Please enter house No")
 	private String houseNo;
