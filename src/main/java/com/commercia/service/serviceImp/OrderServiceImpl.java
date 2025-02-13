@@ -15,7 +15,7 @@ import com.commercia.entity.User;
 import com.commercia.entity.enums.OrderStatus;
 import com.commercia.entity.enums.PaymentStatus;
 import com.commercia.exception.ResourceNotFound;
-import com.commercia.exception.SwiggyException;
+import com.commercia.exception.CommerciaException;
 import com.commercia.repository.AddressesRepository;
 import com.commercia.repository.OrderItemRepository;
 import com.commercia.repository.OrderRepository;
@@ -124,7 +124,7 @@ public class OrderServiceImpl implements OrderService {
 				.orElseThrow(() -> new ResourceNotFound("Order not found with ID: " + orderId));
 
 		if (order.getOrderStatus() == OrderStatus.DELIVERED || order.getOrderStatus() == OrderStatus.CANCELLED) {
-			throw new SwiggyException("Cannot update order status after it is delivered or cancelled.");
+			throw new CommerciaException("Cannot update order status after it is delivered or cancelled.");
 		}
 		order.setOrderStatus(status);
 		orderRepository.save(order);
@@ -139,11 +139,11 @@ public class OrderServiceImpl implements OrderService {
 				.orElseThrow(() -> new ResourceNotFound("Order not found with ID: " + orderId));
 
 		if (order.getPaymentStatus() == PaymentStatus.PAID && status == PaymentStatus.PENDING) {
-			throw new SwiggyException("Cannot revert payment status from PAID to PENDING.");
+			throw new CommerciaException("Cannot revert payment status from PAID to PENDING.");
 		}
 
 		if (order.getOrderStatus() == OrderStatus.CANCELLED && status == PaymentStatus.PAID) {
-			throw new SwiggyException("Cannot mark payment as PAID for a cancelled order.");
+			throw new CommerciaException("Cannot mark payment as PAID for a cancelled order.");
 		}
 
 		order.setPaymentStatus(status);

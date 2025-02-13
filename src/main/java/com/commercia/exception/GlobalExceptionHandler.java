@@ -48,8 +48,8 @@ public class GlobalExceptionHandler {
 				HttpStatus.BAD_REQUEST);
 	}
 
-	@ExceptionHandler(SwiggyException.class)
-	public ResponseEntity<ExceptionResponse> handleInvalidAgeException(SwiggyException ex) {
+	@ExceptionHandler(CommerciaException.class)
+	public ResponseEntity<ExceptionResponse> handleInvalidAgeException(CommerciaException ex) {
 
 		log.error("InvalidAgeException: " + ex.getMessage());
 		return new ResponseEntity<ExceptionResponse>(

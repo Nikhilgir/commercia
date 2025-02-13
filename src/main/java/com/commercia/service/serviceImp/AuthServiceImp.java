@@ -16,7 +16,7 @@ import com.commercia.entity.Addresses;
 import com.commercia.entity.Country;
 import com.commercia.entity.User;
 import com.commercia.entity.User.Gender;
-import com.commercia.exception.SwiggyException;
+import com.commercia.exception.CommerciaException;
 import com.commercia.exception.UserNameNotFoundException;
 import com.commercia.repository.AddressesRepository;
 import com.commercia.repository.CountryRepository;
@@ -63,7 +63,7 @@ public class AuthServiceImp implements AuthService {
 		user.setPhoneNumber(signupRequest.getPhoneNumber());
 
 		if (Period.between(signupRequest.getDateOfBirth(), LocalDate.now()).getYears() < 18) {
-			throw new SwiggyException(ExceptionMessages.INVALID_AGE_EXCEPTION);
+			throw new CommerciaException(ExceptionMessages.INVALID_AGE_EXCEPTION);
 		}
 		user.setAge(Period.between(signupRequest.getDateOfBirth(), LocalDate.now()).getYears());
 		user.setDateOfBirth(signupRequest.getDateOfBirth());

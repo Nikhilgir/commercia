@@ -24,7 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.commercia.entity.User;
 import com.commercia.entity.User.Gender;
-import com.commercia.exception.SwiggyException;
+import com.commercia.exception.CommerciaException;
 import com.commercia.repository.AddressesRepository;
 import com.commercia.repository.CountryRepository;
 import com.commercia.repository.UserRepository;
@@ -117,7 +117,7 @@ public class AuthServiceTest {
 	@Test
 	void registerUser_ShouldHandleExceptionForAge() {
 		requestUser.setDateOfBirth(LocalDate.of(2012, 12, 10));
-		assertThrows(SwiggyException.class, () -> authService.saveSignupDetails(requestUser));
+		assertThrows(CommerciaException.class, () -> authService.saveSignupDetails(requestUser));
 	}
 
 	@AfterAll
