@@ -9,10 +9,10 @@
 		<version>3.2.8</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.swiggy</groupId>
-	<artifactId>newswiggy</artifactId>
+	<groupId>com.commercia</groupId>
+	<artifactId>commercia</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Swiggy Clone Application</name>
+	<name>Commercia Application</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>
